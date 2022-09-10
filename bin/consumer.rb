@@ -22,9 +22,9 @@ def serealize_message(message)
 end
 
 consumer.each_message(automatically_mark_as_processed: true) do |message|
-  sample_message = Sample::SampleMessage.decode(message.value)
+  sample_message = Sample::TestMessage.decode(message.value)
 
-  content = sample_message.conent
+  content = sample_message.content
   created_at = Time.at(sample_message.created_at.seconds).strftime('%Y/%m/%d %H:%M')
   puts "メッセージを受信しました => 内容: #{content}, 日時: #{created_at}"
 end

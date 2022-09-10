@@ -23,7 +23,7 @@ def send_message(kafka, topic)
   producer = kafka.producer
 
   # こんな感じのバイナリになる => "\n\x04\x12\v\b\xAD\x82\xF1\x98\x06\x10\xF0\xC0\x83z"
-  message = Sample::SampleMessage.new(conent: ARGV.first, created_at: Time.now).to_proto
+  message = Sample::TestMessage.new(content: ARGV.first, created_at: Time.now).to_proto
 
   producer.produce(message, topic: topic)
   producer.deliver_messages

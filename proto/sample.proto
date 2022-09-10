@@ -4,7 +4,7 @@ package sample;
 
 import "google/protobuf/timestamp.proto";
 
-message SampleMessage {
-  string conent = 1;
+message TestMessage {
+  string content = 1;
   google.protobuf.Timestamp created_at = 2;
 }

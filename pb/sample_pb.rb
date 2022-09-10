@@ -6,13 +6,13 @@ require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("sample.proto", :syntax => :proto3) do
-    add_message "sample.SampleMessage" do
-      optional :conent, :string, 1
+    add_message "sample.TestMessage" do
+      optional :content, :string, 1
       optional :created_at, :message, 2, "google.protobuf.Timestamp"
     end
   end
 end
 
 module Sample
-  SampleMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("sample.SampleMessage").msgclass
+  TestMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("sample.TestMessage").msgclass
 end
