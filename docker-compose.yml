@@ -23,11 +23,11 @@ services:
       - .:/app
     tty: true
     stdin_open: true
-    depends_on:
-      - kafka
-      - zookeeper
   producer:
     <<: *client_base
     command: bundle exec ruby bin/producer.rb
+    depends_on:
+      - kafka
+      - zookeeper
   consumer:
     <<: *client_base

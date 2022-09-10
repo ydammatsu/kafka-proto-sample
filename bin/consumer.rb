@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+require 'date'
 require 'ruby-kafka'
+require './pb/sample_pb'
 
 kafka = Kafka.new(['kafka:9092'], client_id: 'consumer1')
 
@@ -15,6 +17,14 @@ rescue Kafka::ConnectionError
   retry
 end
 
+def serealize_message(message)
+  message.value
+end
+
 consumer.each_message(automatically_mark_as_processed: true) do |message|
-  puts "メッセージを受信しました: #{message.value}"
+  sample_message = Sample::SampleMessage.decode(message.value)
+
+  content = sample_message.conent
+  created_at = Time.at(sample_message.created_at.seconds).strftime('%Y/%m/%d %H:%M')
+  puts "メッセージを受信しました => 内容: #{content}, 日時: #{created_at}"
 end

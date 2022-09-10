@@ -14,3 +14,8 @@ topic のメッセージを確認する
 ```
 kcat -b localhost:29092 -t topic1
 ```
+
+proto ファイルからコードを自動生成
+```
+docker compose run client_base grpc_tools_ruby_protoc -I proto --ruby_out=pb  proto/sample.proto
+```

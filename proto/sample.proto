@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package sample;
+
+import "google/protobuf/timestamp.proto";
+
+message SampleMessage {
+  string conent = 1;
+  google.protobuf.Timestamp created_at = 2;
+}

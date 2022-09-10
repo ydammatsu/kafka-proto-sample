@@ -2,6 +2,7 @@
 
 require 'date'
 require 'ruby-kafka'
+require './pb/sample_pb'
 
 kafka = Kafka.new(['kafka:9092'], client_id: 'producer1')
 topic = 'topic1'
@@ -20,7 +21,11 @@ end
 # topic にメッセージを送る
 def send_message(kafka, topic)
   producer = kafka.producer
-  producer.produce("#{ARGV.first} : #{DateTime.now}", topic: topic)
+
+  # こんな感じのバイナリになる => "\n\x04\x12\v\b\xAD\x82\xF1\x98\x06\x10\xF0\xC0\x83z"
+  message = Sample::SampleMessage.new(conent: ARGV.first, created_at: Time.now).to_proto
+
+  producer.produce(message, topic: topic)
   producer.deliver_messages
   puts 'メッセージを送信しました'
 end
