@@ -8,3 +8,9 @@ Kafka の Producer と Consumer を Ruby で実装したサンプル<br>
 ```
 brew install kcat
 ```
+
+topic のメッセージを確認する
+
+```
+kcat -b localhost:29092 -t topic1
+```
